@@ -46,7 +46,7 @@ export class InMemoryTodoRepository implements TodoRepository {
         } else {
           reject(new Error('Connection error'));
         }
-      }, 250)
+      }, 250),
     );
   }
 

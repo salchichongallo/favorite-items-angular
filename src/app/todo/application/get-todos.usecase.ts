@@ -8,8 +8,10 @@ export class GetTodosUseCase {
   constructor(private todoRepo: TodoRepository) {}
 
   execute(): Observable<Todo[]> {
-    return from(this.todoRepo.fetchAll()).pipe(
-      switchMap(() => this.todoRepo.todos)
-    );
+    return from(this.getTodos()).pipe(switchMap(() => this.todoRepo.todos));
+  }
+
+  private async getTodos() {
+    return await this.todoRepo.fetchAll();
   }
 }

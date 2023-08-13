@@ -3,17 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { TodoRepository } from './todo/domain/todo.repository';
-import { InMemoryTodoRepository } from './todo/infra/in-memory-todo.repository';
 import { TodoItemComponent } from './ui/todo-item/todo-item.component';
+import { HttpTodoRepository } from './todo/infra/http-todo.repository';
+import { HttpClientModule } from '@angular/common/http';
+import { TodoGateway } from './todo/domain/todo.gateway';
+import { HttpTodoGateway } from './todo/infra/http-todo.gateway';
 
 @NgModule({
   declarations: [AppComponent, TodoItemComponent],
-  imports: [BrowserModule],
+  imports: [BrowserModule, HttpClientModule],
   providers: [
     {
       provide: TodoRepository,
-      useClass: InMemoryTodoRepository,
+      useClass: HttpTodoRepository,
     },
+    { provide: TodoGateway, useClass: HttpTodoGateway },
   ],
   bootstrap: [AppComponent],
 })

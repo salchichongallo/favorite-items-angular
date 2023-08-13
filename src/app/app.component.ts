@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
       catchError((error) => {
         this.error = error;
         return [];
-      })
+      }),
     );
   }
 }
