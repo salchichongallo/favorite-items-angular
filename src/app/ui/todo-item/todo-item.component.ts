@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Todo } from '../../todo/domain/todo';
-import {
-  MaxTodosReached,
-  ToggleFavoriteUseCase,
-} from '../../todo/application/toggle-favorite.usecase';
+import { MaxTodosReached } from '../../todo/domain/todo.service';
+import { ToggleFavoriteUseCase } from '../../todo/application/toggle-favorite.usecase';
 
 @Component({
   selector: 'app-todo-item',

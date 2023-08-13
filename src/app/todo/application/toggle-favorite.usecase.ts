@@ -1,26 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../domain/todo';
-import { TodoRepository } from '../domain/todo.repository';
-
-export class MaxTodosReached extends Error {}
-
-const MAX_FAVORITE_TODOS = 2;
+import { TodoService } from '../domain/todo.service';
 
 @Injectable({ providedIn: 'root' })
 export class ToggleFavoriteUseCase {
-  constructor(private todoRepo: TodoRepository) {}
+  constructor(private todoService: TodoService) {}
 
   async execute(todo: Todo) {
-    if (!todo.isFavorite) {
-      await this.checkFavoriteLimit();
-    }
-    await this.todoRepo.toggleFavorite(todo.id);
-  }
-
-  private async checkFavoriteLimit() {
-    const totalFavorites = await this.todoRepo.countFavorites();
-    if (totalFavorites >= MAX_FAVORITE_TODOS) {
-      throw new MaxTodosReached();
-    }
+    await this.todoService.toggle(todo);
   }
 }
