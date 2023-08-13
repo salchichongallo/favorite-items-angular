@@ -1,0 +1,11 @@
+<header
+  style="display: flex; justify-content: space-between; align-items: center"
+>
+  <h1>App</h1>
+  <button (click)="loadTodos()" type="button">Reload todos</button>
+</header>
+<p *ngIf="error">{{ error.message }}</p>
+<ul>
+  <app-todo-item *ngFor="let todo of todos$ | async" [todo]="todo">
+  </app-todo-item>
+</ul>
